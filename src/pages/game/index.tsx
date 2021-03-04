@@ -20,7 +20,6 @@ const wwenti = {
   ]
 }
 const text = '强';
-const wtanchuguanka = true;
 export const Game = () => {
   const [wtanchuguanka,setWtanchuguanka] = useState<boolean>(false);
   const [userInfo,setUserInfo] = useState<UserInfo>({});

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image,OpenData,Ad,ScrollView,showLoading,hideLoading,navigateTo,createInterstitialAd,createRewardedVideoAd } from 'remax/wechat';
+import { View, Text, Image,OpenData,ScrollView,showLoading,hideLoading,navigateTo,createInterstitialAd,createRewardedVideoAd } from 'remax/wechat';
 import {usePageEvent} from 'remax/macro';
 import './index.css';
 import {siteInfo, userLogin} from "@/util/wxUtils";

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Image, Button, Ad, Text, getStorageSync} from 'remax/wechat';
+import {View, Image, Button, Text, getStorageSync} from 'remax/wechat';
 // @ts-ignore
 import className from 'classnames';
 import './index.css';

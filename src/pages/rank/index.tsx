@@ -149,9 +149,6 @@ const wrank = [
     level:123,
   },
 ];
-const setting = {
-  pg_video_unit_id:'131412'
-};
 const siteConfig:SiteConfig = getStorageSync("siteInfo");
 export const Rank = () => {
   return (

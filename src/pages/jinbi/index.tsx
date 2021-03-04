@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {View, Image, Button, Ad, Text,getStorageSync,setStorageSync} from 'remax/wechat';
+import {View, Image, Button, Text,getStorageSync,setStorageSync} from 'remax/wechat';
 import {usePageEvent} from 'remax/macro';
 // @ts-ignore
 import className from 'classnames';
 import './index.css';
 import {constants} from "@/util/constants";
 import {useState} from "react";
+import CustomAd from "@/components/CustomAd";
+import {SiteConfig} from "@/data";
 
-const setting = constants.siteInfo;
+const siteConfig:SiteConfig = getStorageSync('siteInfo');
 const userInfo = {
   headimgurl:'',
   nickname:'haha',
@@ -102,9 +104,9 @@ export const JinBi = () => {
         </View>
       </View>
       {
-        setting.videoAdId ? (
+        siteConfig.ads?.jinbi ? (
             <View className="wad">
-              <Ad adTheme="white" adType="video" unitId={setting.videoAdId} />
+              <CustomAd adIds={siteConfig.ads?.jinbi} />
             </View>
         ) : null
       }
