@@ -1,0 +1,57 @@
+page {
+    background: #5735b7;
+    color: #fff;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.wmore {
+    padding: 30px;
+}
+
+.wmore .wmoreitem {
+    background-color: #fff;
+    height: 150px;
+    border-radius: 20px;
+    margin: 30px 0;
+}
+
+.wmoreitem .img {
+    width: 80px;
+    height: 80px;
+    float: left;
+    border-radius: 50%;
+    margin: 30px 20px 0;
+}
+
+.wmoreitem .wcon {
+    width: 430px;
+    float: left;
+    height: 80px;
+}
+
+.wmoreitem .wcon .wtitle {
+    color: #000;
+    margin: 30px 20px 10px;
+}
+
+.wmoreitem .wcon .wmiaoshu {
+    color: #ccc;
+    font-size: 26px;
+    margin: 0 20px 10px;
+}
+
+.wmoreitem .wbtm {
+    float: left;
+    background-color: #ed5a5a;
+    border-radius: 20px;
+    padding: 15px 20px;
+    font-size: 26px;
+    margin: 40px 10px 0 0;
+}
+
+.wad {
+    padding: 20px;
+}

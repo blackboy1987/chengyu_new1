@@ -1,0 +1,140 @@
+page {
+    color: #fff;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.main {
+    margin-left: 35px;
+    margin-right: 35px;
+    box-sizing: border-box;
+    padding-bottom: 26px;
+}
+
+.wuser {
+    height: 230px;
+    background-image: linear-gradient(0deg,#f7b7a5,#fca699);
+    border-radius: 30px;
+    margin: 20px;
+}
+
+.wusertitle {
+    color: #fff;
+    padding: 30px 0 40px;
+    font-size: 26px;
+}
+
+.w365-list,.wusertitle {
+    text-align: center;
+}
+
+.wlistitem {
+    float: left;
+    background-color: #d5ddf0;
+    margin-left: 20px;
+}
+
+.wavatar,.wlistitem {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+}
+
+.wavatar {
+    margin: 0;
+}
+
+.wlistitem .img {
+    width: 54px;
+    height: 54px;
+    margin: 10px;
+}
+
+.wjinbi {
+    text-align: center;
+    background-color: #fff;
+    color: red;
+    height: 90px;
+    line-height: 90px;
+    border-radius: 50px;
+    width: 95%;
+    margin: 30px auto;
+}
+
+.wyaoqing {
+    background-image: linear-gradient(-90deg,#705ade 1%,#a038fe);
+}
+
+.qiandao,.wyaoqing {
+    text-align: center;
+    height: 90px;
+    width: 95%;
+    color: #fff;
+    border-radius: 50px;
+    line-height: 90px;
+    margin: 30px auto;
+}
+
+.qiandao {
+    background-image: linear-gradient(90deg,#61cfeb 1%,#3894fe);
+}
+
+.wshiping {
+    width: 95%;
+    height: 90px;
+    background-color: #673ab7;
+    line-height: 90px;
+    border-radius: 50px;
+    text-align: center;
+    margin: 20px auto;
+    color: #fff;
+}
+
+.wad {
+    padding: 0 20px 20px;
+}
+
+.user {
+    background: #fff;
+    border-radius: 30px;
+    color: #7056b5;
+    background: linear-gradient(120deg,#fff 62%,#f5ab96 0);
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 24px 0 10px 30px;
+    border-radius: 50%;
+}
+
+.user-nickname {
+    position: absolute;
+    top: 50px;
+    left: 180px;
+    max-width: 260px;
+    overflow: hidden;
+}
+
+.user-power {
+    position: absolute;
+    top: 43px;
+    right: 35px;
+    color: #fff;
+    width: 250px;
+    text-align: center;
+}
+
+.user-power text {
+    font-size: 45px;
+    line-height: 50px;
+}
+
+.jinbi-box {
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 20px 30px;
+    margin-top: 30px;
+}

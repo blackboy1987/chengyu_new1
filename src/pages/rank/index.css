@@ -1,0 +1,86 @@
+page {
+    color: #fff;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.wpaihang {
+    margin: 20px auto 0;
+    width: 90%;
+}
+
+.wtop {
+    width: 500px;
+    position: fixed;
+    height: 70px;
+    left: 60%;
+    margin-left: -180px;
+}
+
+.wtitle1 {
+    background-color: #ed5a5a;
+    border-radius: 50px;
+}
+
+.wtitle1,.wtitle2 {
+    text-align: center;
+    padding: 20px 50px;
+    font-size: 26px;
+    width: 150px;
+    margin: 0 auto;
+    float: left;
+}
+
+.wtitle2 {
+    background-color: #673ab7;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.wlist {
+    height: 700px;
+    background-color: hsla(0,0%,100%,.2);
+    border-radius: 20px;
+    padding-top: 100px;
+    overflow-y: auto;
+}
+
+.wlist .witem {
+    font-size: 36px;
+    height: 130px;
+    clear: both;
+    margin: 10px;
+}
+
+.witem .img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    float: left;
+    border: 2px solid #fff;
+}
+
+.witem .wid {
+    width: 50px;
+}
+
+.witem .wid,.witem .wname {
+    float: left;
+    margin: 20px 30px;
+}
+
+.witem .wname {
+    width: 240px;
+    font-size: 34px;
+}
+
+.witem .wguansu {
+    float: left;
+    margin: 20px 0px;
+}
+
+.wad {
+    padding: 20px;
+}
