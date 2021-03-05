@@ -1,3 +1,5 @@
+import {UserInfo} from "@/data";
+
 export const constants = {
     baseUrl:'http://localhost:9000/api/',
     appCode: 'IEC3OARSJZAB4SG3TU',
@@ -18,4 +20,18 @@ export const constants = {
         invite_button_text:'邀请新新用户领2000金币',
         invite_text:'邀请领红包好友',
     }
+}
+
+export const defaultUserInfo:UserInfo = {
+    id: 0,
+    token: '',
+    balance:0,
+    amount:0,
+    point:300,
+    avatarUrl:'',
+    rankName:'',
+    nickName:'',
+    isAuth:'',
+    user_id:'',
+    level:0,
 }

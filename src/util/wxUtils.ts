@@ -96,6 +96,20 @@ export const userLogin=(callback?:(res:any)=>void )=>{
     })
 }
 
+export const getUserInfo=(callback?:(res:any)=>void)=>{
+    post("userInfo",{},data=>{
+        if(callback){
+            callback(data);
+        }
+        if(data.userInfo){
+            setStorage("userInfo",data.userInfo);
+        }
+        if(data.token){
+            setStorage('token',data.token);
+        }
+    })
+}
+
 export const siteInfo=(callback?:(res:any)=>void )=>{
     post("site",{},data=>{
         setStorage("siteInfo",data);

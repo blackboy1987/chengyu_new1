@@ -1,156 +1,27 @@
 import * as React from 'react';
-import {View, Image, Button, Ad, getStorageSync} from 'remax/wechat';
+import {View, Image, getStorageSync} from 'remax/wechat';
 // @ts-ignore
 import className from 'classnames';
 import './index.css';
 import {SiteConfig} from "@/data";
 import CustomAd from "@/components/CustomAd";
+import {useState} from "react";
 
-const rank = 1;
-const wrank = [
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-  {
-    id:1,
-    headimgurl:'http://p4.qhimg.com/t01fd9ddeb47975ad37.jpg?&w=96&h=54&rs=2&qlt=100',
-    nickname:'昵称',
-    grade:12,
-    level:123,
-  },
-];
+export type RankItem={
+  id:number;
+  level: number;
+  nickName:string;
+  avatarUrl:string;
+  grade:number;
+}
 const siteConfig:SiteConfig = getStorageSync("siteInfo");
 export const Rank = () => {
+  const [data,setData] = useState<{type:1|2,list:RankItem[]}>({
+    type:1,
+    list:[],
+  });
+
+
   return (
     <>
       <View className="wpaihang">
@@ -159,14 +30,14 @@ export const Rank = () => {
         </View>
         <View className="wlist">
           {
-            rank==1?(
+            data.type==1?(
                 <>
                   {
-                    wrank.map((item,index)=>(
+                    data.list.map((item,index)=>(
                         <View className="witem" key={index}>
                           <View className="wid">{index+1}</View>
-                          <Image className="img" src={item.headimgurl} />
-                          <View className="wname">{item.nickname}</View>
+                          <Image className="img" src={item.avatarUrl} />
+                          <View className="wname">{item.nickName}</View>
                           <View className="wguansu">{item.level}关</View>
                         </View>
                     ))
@@ -175,15 +46,15 @@ export const Rank = () => {
             ): null
           }
           {
-            rank===2?(
+            data.type===2?(
                 <>
                   {
-                    wrank.map((item,index)=>(
+                    data.list.map((item,index)=>(
                         <View className="witem" key={index}>
                           <View className="wid">{index+1}</View>
-                          <Image className="img" src={item.headimgurl} />
-                          <View className="wname">{item.nickname}</View>
-                          <View className="wguansu" style="font-size:30rpx">{item.grade}</View>
+                          <Image className="img" src={item.avatarUrl} />
+                          <View className="wname">{item.nickName}</View>
+                          <View className="wguansu" style={{fontSize:30}}>{item.grade}</View>
                         </View>
                     ))
                   }

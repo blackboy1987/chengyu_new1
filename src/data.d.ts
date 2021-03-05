@@ -40,17 +40,17 @@ export type MenuButtonBoundingClientRect={
 }
 
 export type UserInfo = {
-    id?:number;
-    token?: string;
-    balance?:number;
-    amount?:number;
-    point?:number;
-    avatarUrl?:string;
-    rankName?:string;
-    nickName?:string;
-    isAuth?:string;
-    user_id?:string;
-    level?:number;
+    id: number;
+    token: string;
+    balance:number;
+    amount:number;
+    point:number;
+    avatarUrl:string;
+    rankName:string;
+    nickName:string;
+    isAuth:string;
+    user_id:string;
+    level:number;
 }
 
 export type AdIds = {
@@ -78,6 +78,7 @@ export type SiteConfig = {
 
 export type Idiom = {
     level: number;
-    text: string[];
-    answers:String[];
+    words: string[];
+    answers:string[];
+    position:number;
 }

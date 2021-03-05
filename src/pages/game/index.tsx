@@ -5,54 +5,68 @@ import {usePageEvent} from 'remax/macro';
 import className from 'classnames';
 import './index.css';
 import CustomAd from "@/components/CustomAd";
-import {SiteConfig, UserInfo} from "@/data";
+import {Idiom, SiteConfig, UserInfo} from "@/data";
 import {useState} from "react";
 import {post} from "@/util/wxUtils";
+import {defaultUserInfo} from "@/util/constants";
 
 const siteConfig:SiteConfig = getStorageSync("siteInfo");
 
-const wwenti = {
-  keyword:[
-      '一','墙','?','隔',
-  ],
-  alternatives:[
-      '强','抢','抢','呛'
-  ]
-}
-const text = '强';
 export const Game = () => {
   const [wtanchuguanka,setWtanchuguanka] = useState<boolean>(false);
-  const [userInfo,setUserInfo] = useState<UserInfo>({});
+  const [userInfo,setUserInfo] = useState<UserInfo>(defaultUserInfo);
+  const [idiom,setIdiom] = useState<Idiom>({
+    level:0,
+    answers:[],
+    words:[],
+    position:0,
+  });
+  const [text,setText] = useState<string>('');
 
   const get=(level?:number)=>{
     post("chengyu/get",{level:level?level:''},data=>{
-      console.log(data);
+      setIdiom(data);
     })
   }
 
   usePageEvent("onLoad",()=>{
     get();
+    setUserInfo(defaultUserInfo);
   })
 
 
   const judge= (result: string)=>{
+    setText(result);
     /**
      * 1. 判断金币够不够，不够提示体力不足，够进入第2步
      * 2. 判断回答正不正确。
      */
-    showModal({
-      title: "温馨提示",
-      content: "您的体力已经不足，点击按钮获取更多体力",
-      confirmText: "去获取",
-      confirmColor: "#fd5757"
-    }).then((res)=>{
-      console.log("res",res);
-      if(res.confirm){
-        navigateTo({
-          url: "/pages/jinbi/index"
-        }).then();
+    if(userInfo.point>100){
+      // 扣减积分
+      post("chengyu/discount",{},data=>{
+
+      });
+      if(result===idiom.words[idiom.position]){
+        // 回答正确。写入连对数据
+      }else{
+        // 回答错误，清空连队数据
       }
-    })
+    }else{
+      showModal({
+        title: "温馨提示",
+        content: "您的体力已经不足，点击按钮获取更多体力",
+        confirmText: "去获取",
+        confirmColor: "#fd5757"
+      }).then((res)=>{
+        console.log("res",res);
+        if(res.confirm){
+          navigateTo({
+            url: "/pages/jinbi/index"
+          }).then();
+        }
+      })
+    }
+
   }
 
   /**
@@ -72,7 +86,7 @@ export const Game = () => {
       imageUrl: 'tu',
     }
   })
-
+console.log(idiom);
   return (
     <>
       <View className="game">
@@ -80,7 +94,7 @@ export const Game = () => {
           <View className="menu menu-power">
             <View className="menu-left">
               <View className="menu-text menu-power-title">闯关体力</View>
-              <View className="menu-text menu-power-num">123</View>
+              <View className="menu-text menu-power-num">{userInfo.point}</View>
             </View>
             <View className="menu-right">
               <View className="menu-btn menu-btn-power">
@@ -94,7 +108,7 @@ export const Game = () => {
           <View className="menu menu-money">
             <View className="menu-left">
               <View className="menu-text menu-money-title">红包余额</View>
-              <view className="menu-text menu-money-num">134.4</view>
+              <view className="menu-text menu-money-num">{userInfo.balance}</view>
             </View>
             <View className="menu-right">
               <View className="menu-btn menu-btn-money">
@@ -104,16 +118,16 @@ export const Game = () => {
           </View>
         </View>
         <View className="wchengyu">
-          <View className="title">第 123 关</View>
+          <View className="title">第 {idiom.level} 关</View>
           <View className="chenyubox">
             {
-              wwenti.keyword.map((item,index)=>(<View className="wchengyuitem" key={index}>{item}</View>))
+              (idiom.words||[]).map((item,index)=>(<View className="wchengyuitem" key={index}>{index===idiom.position?'?':item}</View>))
             }
           </View>
         </View>
         <View className="wxuanxiang">
           {
-            wwenti.alternatives.map((item,index)=>(<View className={className('wopt',text===item?'werr':'')} key={index} onClick={()=>{
+            (idiom.answers||[]).map((item,index)=>(<View className={className('wopt',text===item?'werr':'')} key={index} onClick={()=>{
               judge(item);
             }}>{item}</View>))
           }
