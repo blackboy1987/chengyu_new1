@@ -75,7 +75,7 @@ const gonggao= false;
 const qiandao = false;
 let rewardedVideoAd: WechatMiniprogram.RewardedVideoAd;
 let interstitialAd: WechatMiniprogram.InterstitialAd;
-let timer;
+let timer:NodeJS.Timeout;
 
 
 export default () => {

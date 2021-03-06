@@ -35,3 +35,14 @@ export const defaultUserInfo:UserInfo = {
     user_id:'',
     level:0,
 }
+
+export const defaultSiteConfig = {
+    name:'',
+    config:{
+        levelPoint:100,
+        signPoint: 300,
+        perVideoGold: 1000,
+        inviteButtonText:'邀请新用户领取2000金币',
+        inviteText:'邀请领红包好友',
+    }
+}

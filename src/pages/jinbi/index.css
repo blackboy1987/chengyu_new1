@@ -110,6 +110,14 @@ page {
     border-radius: 50%;
 }
 
+.user-avatar1 {
+    width: 100px;
+    height: 100px;
+    margin: 24px 0 10px 30px;
+    border-radius: 50%;
+    border: solid 1px red;
+}
+
 .user-nickname {
     position: absolute;
     top: 50px;

@@ -102,10 +102,7 @@ export const getUserInfo=(callback?:(res:any)=>void)=>{
             callback(data);
         }
         if(data.userInfo){
-            setStorage("userInfo",data.userInfo);
-        }
-        if(data.token){
-            setStorage('token',data.token);
+            setStorage("userInfo",data);
         }
     })
 }

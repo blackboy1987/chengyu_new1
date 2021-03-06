@@ -73,6 +73,13 @@ export type SiteConfig = {
         jinbi:AdIds;
         more:AdIds;
         rank:AdIds;
+    },
+    config:{
+        levelPoint:number;
+        signPoint: number;
+        perVideoGold: number;
+        inviteButtonText:string;
+        inviteText: string;
     }
 }
 

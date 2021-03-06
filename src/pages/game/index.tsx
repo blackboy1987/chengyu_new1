@@ -1,5 +1,15 @@
 import * as React from 'react';
-import { View, Image,Button,getStorageSync,showModal,navigateTo,CoverView,CoverImage } from 'remax/wechat';
+import {
+  View,
+  Image,
+  Button,
+  getStorageSync,
+  showModal,
+  navigateTo,
+  CoverView,
+  CoverImage,
+  setStorageSync
+} from 'remax/wechat';
 import {usePageEvent} from 'remax/macro';
 // @ts-ignore
 import className from 'classnames';
@@ -7,11 +17,19 @@ import './index.css';
 import CustomAd from "@/components/CustomAd";
 import {Idiom, SiteConfig, UserInfo} from "@/data";
 import {useState} from "react";
-import {post} from "@/util/wxUtils";
+import {getUserInfo, post} from "@/util/wxUtils";
 import {defaultUserInfo} from "@/util/constants";
 
 const siteConfig:SiteConfig = getStorageSync("siteInfo");
-
+const adv = {
+  status:true,
+  data:[],
+}
+const wtanchuhongbao = true;
+const whongbao = {
+  openStatus:true,
+  balance:2.2,
+}
 export const Game = () => {
   const [wtanchuguanka,setWtanchuguanka] = useState<boolean>(false);
   const [userInfo,setUserInfo] = useState<UserInfo>(defaultUserInfo);
@@ -31,7 +49,9 @@ export const Game = () => {
 
   usePageEvent("onLoad",()=>{
     get();
-    setUserInfo(defaultUserInfo);
+    getUserInfo((data)=>{
+      setUserInfo(data);
+    })
   })
 
 
@@ -41,16 +61,23 @@ export const Game = () => {
      * 1. 判断金币够不够，不够提示体力不足，够进入第2步
      * 2. 判断回答正不正确。
      */
-    if(userInfo.point>100){
-      // 扣减积分
-      post("chengyu/discount",{},data=>{
-
-      });
+    if(userInfo.point>siteConfig.config.levelPoint){
+      let memo='';
+      let continuousCount = getStorageSync('continuous') || 0;
       if(result===idiom.words[idiom.position]){
         // 回答正确。写入连对数据
+        memo='回答正确';
+        continuousCount +=1;
       }else{
         // 回答错误，清空连队数据
+        memo='回答错误';
+        continuousCount = 0;
       }
+      setStorageSync('continuousCount',continuousCount);
+      // 扣减积分
+      post("chengyu/discount",{level:idiom.level,memo},data=>{
+        // 不管回答正确还是错误，直接跳转到下一关
+      });
     }else{
       showModal({
         title: "温馨提示",
@@ -150,10 +177,53 @@ console.log(idiom);
                 <CoverView className="wcon">连续答题有机会获得红包</CoverView>
                 <CoverView onClick={()=>next()} className="wbtn">进入下一关</CoverView>
               </CoverView>
+              {
+                adv.status ? (
+                    <CoverView className="links">
+                      {
+                        adv.data.map((item:{
+                          appid:string;
+                          image:string;
+                          name: string;
+                        })=>(
+                            <CoverView key={item.appid}>
+                              <CoverImage className="avatar" src={item.image} />
+                              <CoverView className="name">{item.name}</CoverView>
+                            </CoverView>
+                        ))
+                      }
 
+                    </CoverView>
+                ) : null
+              }
             </CoverView>
         ) : null
       }
+      {
+        wtanchuhongbao ? (
+            <CoverView className="wbox" style={{zIndex:10000}}>
+              <CoverView className="whongbao">
+                <CoverImage className="wbgimg" src="/images/icon/redbag.png" />
+                <CoverView className="wtitle">恭喜</CoverView>
+                <CoverView className="wcon">您获得一个现金红包</CoverView>
+                <CoverView className="wopenhongbao">
+                  {
+                    whongbao.openStatus ? (
+                        <CoverView className="wshowhongbao">{whongbao.balance} 元</CoverView>
+                    ) : (
+                        <CoverImage  className="whongbaoimg" src="/images/icon/open.png" />
+                    )
+                  }
+                </CoverView>
+                <CoverView className="wmiaoshu">该红包仅可用于兑换商品</CoverView>
+              </CoverView>
+              <CoverView className="wclose">
+                <CoverImage className="wcloseimg" src="/images/icon/detail/poster/close.png" />
+              </CoverView>
+            </CoverView>
+        ) : null
+      }
+
 
 
     </>

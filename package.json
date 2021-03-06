@@ -14,7 +14,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "react": "^16.14.0",
-    "remax": "^2.11.4"
+    "remax": "^2.11.6"
   },
   "devDependencies": {
     "@types/react": "^16.14.2",

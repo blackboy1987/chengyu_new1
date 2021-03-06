@@ -6,6 +6,8 @@ import './index.css';
 import {SiteConfig} from "@/data";
 import CustomAd from "@/components/CustomAd";
 import {useState} from "react";
+import {usePageEvent} from "remax/macro";
+import {post} from "@/util/wxUtils";
 
 export type RankItem={
   id:number;
@@ -21,6 +23,11 @@ export const Rank = () => {
     list:[],
   });
 
+  usePageEvent("onLoad",()=>{
+    post('chengyu/rank',{},data=>{
+      setData(data);
+    })
+  })
 
   return (
     <>
